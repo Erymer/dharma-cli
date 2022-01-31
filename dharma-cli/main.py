@@ -1,89 +1,63 @@
 #!/usr/bin/env python3
-# TODO: Hacer que se pueda imprimir texto en diferente color y formato
-# TODO: Hacerle un exception catch a print_justified_quote para que solo pueda
-        # recibir parámetros left, right center. Por ahora solo marca un error para el
-        # usuario pero idealmente seria que si se pone el parámetro mal marcara un
-        # error para el programador
+# TODO: Ponerle un exception error por si se pone algo que no sea un int en
+# argumento q
+# TODO: Un argumento para que sea una frase diferente cada día en ves de cada
+# que se abre una terminal
 
+from QuoteBook import QuoteBook
 import random
-import shutil
+import sys
+import getopt
+import os
 
-JUSTIFY_POSITION = "right"
-FILE_QUOTE_SEPARATOR = "'''"
-QUOTES_FILE = '../example-file.txt'
+file_path = f'{os.path.expanduser("~")}/.config/dharma/dharma-quotes.txt'
 
-def create_quotes_lists(file, separator):
-    '''
-    Creates a list from the quotes file. Each quote from the file must be
-    separated by the character defined in the separator parameter
-    :param1: String. Path of the file with the quotes.
-    :param2: String. Character or set of character used to separate each quote
-             in the file.
-    :returns: List. Each element of the list is a different quote.
-    '''
+justification_position = "center"
 
-    with open(file) as quotes_file:
-        quotes = quotes_file.read()
+arguments = sys.argv[1:]
+short_options = "hf:j:q:"
+long_options = ["help", "file", "justify-to", "quote"]
 
-    file_list = quotes.split(separator)
+quote_select = False
 
-    # Remove elements in the list that only contains spaces
-    # This allows to separate each quote in the file with empty lines,
-    # making it more readable.
-    quotes_list = []
-    for quote in file_list:
-        if not quote.isspace():
-            quotes_list.append(quote)
+try:
+    opts, args = getopt.getopt(arguments, short_options, long_options)
 
-    # If the file is formated correctly the first element of the list is a new
-    # line character. 
-    quotes_list.pop(0)
+except getopt.GetoptError:
+    print("Error, not a valid option")
+    sys.exit(1)
 
-    return quotes_list
+for opt, arg in opts:
+    if opt in ("-h", "--help"):
+        print("Help text")
+        sys.exit(0)
 
-
-
-def print_justified_quote(quote, justify_position):
-    '''
-    :param1: String. String that will be printed.
-    :param2: String. Desided justified position. Valid positions: left, right,
-             center.
-    :returns: Prints string in the terminal in the desided position.
-    '''
-
-    # CYAN = '\033[96m'
-    # DARKCYAN = '\033[36m'
-    # BLUE = '\033[94m'
-    # GREEN = '\033[92m'
-    # YELLOW = '\033[93m'
-    # RED = '\033[91m'
-    BOLD = '\033[1m'
-    # UNDERLINE = '\033[4m'
-    # END = '\033[0m'
-
-    quote_pick = quote.split('\n')
-
-    print(BOLD)
-    quote_len = len(quote_pick)
-    for sentence in range(quote_len):
-        current_sentence = quote_pick[sentence]
-        terminal_size = shutil.get_terminal_size().columns
-        if justify_position.lower() == "left":
-            print(current_sentence.ljust(terminal_size)) #  Left justification
-
-        elif justify_position.lower() == "right":
-            print(current_sentence.rjust(terminal_size)) #  Right justification
-
-        elif justify_position.lower() == "center":
-            print(current_sentence.center(terminal_size)) #  Center justification
+    elif opt in ("-j", "--justify-to"):
+        if ((arg.lower() == "left") or
+            (arg.lower() == "right") or
+            (arg.lower() == "center")):
+            justification_position = arg
         else:
-            print("Invalid parameter. Only left, center or right is allowed")
-            exit(1)
+            print(f"{arg} is an invalid value")
+            print("Valid positions = left, center or right")
+            sys.exit(1)
+
+    elif opt in ("-f", "--file"):
+        file_path = arg
+
+    elif opt in ("-q", "--quote"):
+        quote_select = True
+        quote_num = int(arg)
 
 
-def main():
-    quotes_list = create_quotes_lists(QUOTES_FILE, FILE_QUOTE_SEPARATOR)
-    quote_pick = random.choice(quotes_list)
-    print_justified_quote(quote_pick, JUSTIFY_POSITION)
+try:
+    dharma = QuoteBook(file_path)
+except FileNotFoundError:
+    print(f"{file_path} Doesn't exist. Using example file")
+    dharma = QuoteBook("../example-file.txt")
 
-main()
+if quote_select:
+    dharma.print_quote(quote_num, justification_position)
+else:
+    quote_num=random.randint(1, dharma.quotes_quantity)
+    dharma.print_quote(quote_num, justification_position)
