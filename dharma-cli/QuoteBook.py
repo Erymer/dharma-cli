@@ -74,7 +74,7 @@ class QuoteBook:
         quote_num -= 1 #  So you select the real position of the quote
         try:
             selected_quote = self.quotes[quote_num]
-        except:
+        except IndexError:
             print(f"[ERROR] {quote_num+1} outside of scope")
             print(f"You have {self.quotes_quantity} quotes in your book." )
             exit(1)

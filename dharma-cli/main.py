@@ -1,63 +1,72 @@
 #!/usr/bin/env python3
-# TODO: Ponerle un exception error por si se pone algo que no sea un int en
-# argumento q
-# TODO: Un argumento para que sea una frase diferente cada día en ves de cada
-# que se abre una terminal
+# TODO: An argument that prints a different quote for each day
+# TODO: Reformat main function
 
 from QuoteBook import QuoteBook
 import random
-import sys
-import getopt
+import argparse
 import os
 
-file_path = f'{os.path.expanduser("~")}/.config/dharma/dharma-quotes.txt'
-
-justification_position = "center"
-
-arguments = sys.argv[1:]
-short_options = "hf:j:q:"
-long_options = ["help", "file", "justify-to", "quote"]
-
-quote_select = False
-
-try:
-    opts, args = getopt.getopt(arguments, short_options, long_options)
-
-except getopt.GetoptError:
-    print("Error, not a valid option")
-    sys.exit(1)
-
-for opt, arg in opts:
-    if opt in ("-h", "--help"):
-        print("Help text")
-        sys.exit(0)
-
-    elif opt in ("-j", "--justify-to"):
-        if ((arg.lower() == "left") or
-            (arg.lower() == "right") or
-            (arg.lower() == "center")):
-            justification_position = arg
-        else:
-            print(f"{arg} is an invalid value")
-            print("Valid positions = left, center or right")
-            sys.exit(1)
-
-    elif opt in ("-f", "--file"):
-        file_path = arg
-
-    elif opt in ("-q", "--quote"):
-        quote_select = True
-        quote_num = int(arg)
+DEFAULT_FILE_PATH = f'{os.path.expanduser("~")}/.config/dharma/dharma-quotes.txt'
+DEFAULT_JUSTIFICATION_POSITION = "center"
 
 
-try:
-    dharma = QuoteBook(file_path)
-except FileNotFoundError:
-    print(f"{file_path} Doesn't exist. Using example file")
-    dharma = QuoteBook("../example-file.txt")
+def main():
+    '''
+    Main function
+    '''
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-j", "--justify",
+                        help="Justification position. Accepted values are left, center, right,",
+                        choices=["left", "right", "center"])
+    parser.add_argument("-f", "--file", help="Specify a file with quotes")
+    parser.add_argument("-q", "--quote", help="Print a specific quote", type=int)
+    parser.add_argument("--quantity",
+                        help="Tells how many quotes you have in your file",
+                        action="store_true")
 
-if quote_select:
-    dharma.print_quote(quote_num, justification_position)
-else:
-    quote_num=random.randint(1, dharma.quotes_quantity)
-    dharma.print_quote(quote_num, justification_position)
+    args = parser.parse_args()
+
+
+    # JUSTIFICATION POSITION
+    if args.justify == "center":
+        justification_position = "center"
+    elif args.justify == "right":
+        justification_position = "right"
+    elif args.justify == "left":
+        justification_position = "left"
+    else:
+        justification_position = DEFAULT_JUSTIFICATION_POSITION
+
+    # QUOTES FILE
+    if args.file:
+        file_path = args.file
+    else:
+        file_path = DEFAULT_FILE_PATH
+
+
+    try:
+        dharma = QuoteBook(file_path)
+    except FileNotFoundError:
+        print(f"{file_path} Doesn't exist. Using example file")
+        dharma = QuoteBook("../example-file.txt")
+
+    if args.quantity:
+        print(f"You have {dharma.quotes_quantity} quotes in your file")
+        exit(0)
+
+    # QUOTE SELECTION
+    if args.quote:
+        quote_num = args.quote
+    else:
+        quote_num=random.randint(1, dharma.quotes_quantity)
+
+    try:
+        dharma.print_quote(quote_num, justification_position)
+    except IndexError:
+        print("Quote number outside of scope")
+        print(f"You have {dharma.quotes_quantity} quotes")
+        exit(1)
+
+if __name__ == "__main__":
+    main()
