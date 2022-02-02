@@ -2,7 +2,9 @@
 # TODO: An argument that prints a different quote for each day
 # TODO: Reformat main function
 
-from QuoteBook import QuoteBook
+from dharma import QuoteBook
+# from QuoteBook import QuoteBook
+# import QuoteBook
 import random
 import argparse
 import os
@@ -67,6 +69,7 @@ def main():
         print("Quote number outside of scope")
         print(f"You have {dharma.quotes_quantity} quotes")
         exit(1)
+
 
 if __name__ == "__main__":
     main()
