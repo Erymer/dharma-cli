@@ -1,8 +1,8 @@
 import unittest
 from dharma import QuoteBook
 from pathlib import Path
-# from unittest import mock
-# import io
+from unittest import mock
+import io
 # from dharma import main
 
 
