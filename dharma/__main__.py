@@ -29,8 +29,6 @@ def main():
 
     args = parser.parse_args()
 
-
-    # JUSTIFICATION POSITION
     if args.justify == "center":
         justification_position = "center"
     elif args.justify == "right":
@@ -40,24 +38,21 @@ def main():
     else:
         justification_position = DEFAULT_JUSTIFICATION_POSITION
 
-    # QUOTES FILE
     if args.file:
         file_path = args.file
     else:
         file_path = DEFAULT_FILE_PATH
 
-
     try:
         dharma = QuoteBook(file_path)
     except FileNotFoundError:
         print(f"{file_path} Doesn't exist. Using example file")
-        dharma = QuoteBook("../example-file.txt")
+        dharma = QuoteBook("/etc/dharma/dharma-quotes.txt")
 
     if args.quantity:
         print(f"You have {dharma.quotes_quantity} quotes in your file")
         exit(0)
 
-    # QUOTE SELECTION
     if args.quote:
         quote_num = args.quote
     else:
