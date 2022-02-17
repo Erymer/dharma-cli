@@ -5,7 +5,6 @@
 
 import shutil
 
-
 class QuoteBook:
     '''
     Creates a quotebook
