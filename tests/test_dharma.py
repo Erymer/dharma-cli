@@ -1,9 +1,6 @@
 import unittest
 from dharma import QuoteBook
 from pathlib import Path
-from unittest import mock
-import io
-# from dharma import main
 
 
 DEFAULT_SEPARATOR_TEST_FILE = Path(__file__).parent / "book_tests/default_separator.txt"

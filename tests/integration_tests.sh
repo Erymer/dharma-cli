@@ -1,6 +1,7 @@
 #!/usr/bin/bash
-
-cd $HOME/Scripts/Python/dharma-cli || exit
+DIR="$(cd "$(dirname "$0")" && pwd)"
+cd $DIR || exit
+cd ..
 
 read -r -d '' expected_center_justification <<'EOF'
 [1m
@@ -30,7 +31,6 @@ default_test=$(python -m dharma -f tests/book_tests/default_separator.txt -q 1)
 right_test=$(python -m dharma -f tests/book_tests/default_separator.txt -q 1 -j right)
 center_test=$(python -m dharma -f tests/book_tests/default_separator.txt -q 1 -j center)
 left_test=$(python -m dharma -f tests/book_tests/default_separator.txt -q 1 -j left)
-
 
 if [ "$default_test" = "$expected_center_justification" ]; then
   echo "Default test correct"
