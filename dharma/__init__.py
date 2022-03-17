@@ -1,1 +1,1 @@
-from dharma.QuoteBook import QuoteBook
+from dharma.quotebook import QuoteBook
