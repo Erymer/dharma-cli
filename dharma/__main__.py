@@ -3,8 +3,6 @@
 # TODO: Reformat main function
 
 from dharma import QuoteBook
-# from QuoteBook import QuoteBook
-# import QuoteBook
 import random
 import argparse
 import os
