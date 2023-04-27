@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 # TODO: Hacer que se pueda imprimir texto en diferente color y formato
-# TODO: Idea: Un método que diga una random quote
-# TODO: Idea: Que se pueda crear book desde el programa o desde un archivo
 
 import shutil
 
@@ -16,39 +14,36 @@ class QuoteBook:
     def __init__(self, quotes_file, quote_separator="'''"):
         self.quotes_file = quotes_file
         self.quote_separator = quote_separator
-        self.quotes = self.create_book(quotes_file, quote_separator)
+        self.__create_book()
         self.quotes_quantity = len(self.quotes)
 
 
-    def create_book(self, quotes_file, separator):
+    def __create_book(self):
         '''
         Creates a list from the quotes file. Each quote from the file must be
         separated by the character defined in the separator parameter
-        :param1: String. Path of the file with the quotes.
+        :param1: 
         :param2: String. Character or set of character used to separate each quote
                  in the file.
         :returns: List. Each element of the list is a different quote.
         '''
 
-        with open(quotes_file) as quotes_file:
+        with open(self.quotes_file) as quotes_file:
             quotes = quotes_file.read()
 
-        file_list = quotes.split(separator)
+        file_list = quotes.split(self.quote_separator)
 
         # Remove elements in the list that only contains spaces
         # This allows to separate each quote in the file with empty lines,
         # making it more readable.
         quotes_list = []
         for quote in file_list:
-            if not quote.isspace():
-                quotes_list.append(quote)
+            if not quote.isspace() and not len(quote) == 0:
+                quotes_list.append(quote.strip())
 
-        # If the file is formated correctly the first element of the list is a new
-        # line character. 
-        quotes_list.pop(0)
+        self.quotes = quotes_list
 
-        return quotes_list
-
+        return self.quotes
 
 
     def print_quote(self, quote_num, justify_position):
@@ -101,5 +96,3 @@ class QuoteBook:
 
     def how_many_quotes(self):
         print(f"You have {self.quotes_quantity} quotes in your book")
-
-

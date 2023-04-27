@@ -7,7 +7,7 @@ import random
 import argparse
 import os
 
-DEFAULT_FILE_PATH = f'{os.path.expanduser("~")}/.config/dharma/quotes.dharma'
+DEFAULT_FILE_PATH = f'{os.path.expanduser("~")}/.config/dharma/quotebook.txt'
 DEFAULT_JUSTIFICATION_POSITION = "center"
 
 
@@ -45,7 +45,7 @@ def main():
         dharma = QuoteBook(file_path)
     except FileNotFoundError:
         print(f"{file_path} Doesn't exist. Using example file")
-        dharma = QuoteBook("/etc/dharma/quotes.dharma")
+        dharma = QuoteBook("/etc/dharma-cli/quotebook.txt")
 
     if args.quantity:
         print(f"You have {dharma.quotes_quantity} quotes in your file")
