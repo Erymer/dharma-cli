@@ -1,27 +1,34 @@
-# dharma-cli
-dharma-cli es a simple python program that prints random quotes on the terminal
+# About
 
-It's intended use is for using it inside your bashrc (or in the configuration
-file of your preferred shell) and then everytime that you open a new terminal
-you are greeted with any of your favorite quotes, similar in the way that a lot
-of people uses neofetch. 
+dharma-cli is a simple Python program that prints random quotes on
+the terminal. It adds a touch of inspiration or amusement to your daily terminal
+experience.
 
-You can use your own favorite quotes and choose the justification in which the
-quotes are printed in the terminal.
+dharma-cli is like a little companion for your terminal, ready to sprinkle some
+magic and inspiration into your day! It's a simple Python program that delivers
+random quotes right to your command line.
+
+# Usage
+
+The program is designed to be integrated into your bashrc or preferred shell
+configuration file. By doing so, every time you open a new terminal session,
+you'll be greeted with a random quote of your choice. It's similar to how many
+people use neofetch for displaying system information everytime a new terminal
+is opened.
+
 
 # Quote Book
-The file that contains all your selected quotes is known as "Quote Book".
 
-By default dharma-cli uses the quotes that are in the quote book in
-$HOME/.config/dharma/quotes.qb
+The collection of quotes used by dharma-cli is stored in a file known as the
+"Quote Book". By default, the program looks for the quote book at
+$HOME/.config/dharma/quotes.qb. If this file doesn't exist, dharma-cli falls
+back to using a default quote book located at /usr/share/.
 
-If this quote book doesn't exist, dharma-cli will use a default quote book that
-is in /usr/share/. You can also use this quote book as a reference to make your
-own.
-
-The syntaxis of the quote book is very similar to the way in which docstrings
-are written in Python. By default three single quotes are used as delimitator
-for each quote, but you can use a different delimitator if you wish.
+Feel free to use the default quote book as a reference to create your own
+personalized collection. By default the syntax of the quote book is similar to
+Python docstrings, with three single quotes (''') used as delimiters for the
+beginning and the end of each quote. However, you can choose a different
+delimiter if you prefer.
 
 ```
 '''
@@ -34,30 +41,18 @@ This is another Quote
 You can have empty lines inside the quote
 '''
 ```
-# Intended use
-If you want that everytime you open your terminal you are received with a nice
-quote just add this line at the end of the configuration file of your current
-shell.
 
-```
-dharma
-```
 
-Really, that's it
+# Customization
 
-By default it will print the quotes in the center of the terminal. If you want to use a
-different position pick one of this lines.
-
-```
-dharma --justify left
-
-dharma --justify right
-```
+You have the freedom to populate the quote book with your own favorite quotes.
+Choose the quotes that resonate with you, whether they are inspirational, funny,
+or thought-provoking. Additionally, you can customize the justification style in
+which the quotes are printed in the terminal. Pick from left, right, or center
+justification based on your preference.
 
 
 # Installation
-## Arch Linux
-From AUR
 
-## From Source
-
+To use dharma-cli, simply clone this repository and integrate it into your shell
+configuration file. Make sure you have Python installed on your system.

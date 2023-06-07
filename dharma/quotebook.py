@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# TODO: Hacer que se pueda imprimir texto en diferente color y formato
 
 import shutil
 
