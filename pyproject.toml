@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "Dharma"
 version = "1.0"
 authors = [
-  { name="Marcelo Galván", email="author@example.com" },
+  { name="Marcelo Galván", email="marcelo_galvan@protonmail.com" },
 ]
 description = "Knowledge"
 readme = "README.md"

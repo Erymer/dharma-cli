@@ -1,6 +1,4 @@
 from dharma.quotebook import QuoteBook
-
-# from dharma import QuoteBook
 import random
 import argparse
 import os
@@ -44,8 +42,12 @@ def main():
     try:
         dharma = QuoteBook(file_path)
     except FileNotFoundError:
-        print(f"{file_path} Doesn't exist. Using example file")
-        dharma = QuoteBook(EXAMPLE_FILE_PATH)
+        try:
+            dharma = QuoteBook(EXAMPLE_FILE_PATH)
+            print(f"{file_path} Doesn't exist. Using example file")
+        except FileNotFoundError:
+            print("No configuration file found")
+            exit(1)
 
     if args.quantity:
         print(f"You have {dharma.quotes_quantity} quotes in your file")
