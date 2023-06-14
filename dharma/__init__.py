@@ -18,8 +18,8 @@ def main():
                         help="Justification position. Accepted values are left, center, right,",
                         choices=["left", "right", "center"])
     parser.add_argument("-f", "--file", help="Specify a file with quotes")
-    parser.add_argument("-q", "--quote", help="Print a specific quote", type=int)
-    parser.add_argument("--quantity",
+    parser.add_argument("-p", "--print", help="Print a specific quote", type=int)
+    parser.add_argument("-n", "--number",
                         help="Tells how many quotes you have in your file",
                         action="store_true")
 
@@ -49,12 +49,12 @@ def main():
             print("No configuration file found")
             exit(1)
 
-    if args.quantity:
+    if args.number:
         print(f"You have {dharma.quotes_quantity} quotes in your file")
         exit(0)
 
-    if args.quote:
-        quote_num = args.quote
+    if args.print:
+        quote_num = args.print
     else:
         quote_num=random.randint(1, dharma.quotes_quantity)
 
