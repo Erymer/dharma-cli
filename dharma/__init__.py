@@ -3,10 +3,11 @@ import random
 import argparse
 import os
 
-DEFAULT_FILE_PATH = f'{os.path.expanduser("~")}/.config/dharma/quotebook.txt'
-DEFAULT_JUSTIFICATION_POSITION = "center"
-# EXAMPLE_FILE_PATH = "/usr/share/doc/dharma/quotebook.txt"
+CONFIG_FOLDER = os.path.expanduser("~/.config/dharma")
+CONFIG_FILE_PATH = os.path.join(CONFIG_FOLDER, "quotebook.txt")
 EXAMPLE_FILE_PATH = "/etc/quotebook.txt"
+
+DEFAULT_JUSTIFICATION_POSITION = "center"
 
 
 def main():
@@ -37,7 +38,7 @@ def main():
     if args.file:
         file_path = args.file
     else:
-        file_path = DEFAULT_FILE_PATH
+        file_path = CONFIG_FILE_PATH
 
     try:
         dharma = QuoteBook(file_path)
