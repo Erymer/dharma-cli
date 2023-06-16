@@ -3,7 +3,7 @@ default: install
 
 PYTHON ?= $(shell \
 	     (which python3) \
-	     || (python -c 'import sys; sys.exit(sys.version < "3.1")' && \
+	     || (python -c 'import sys; sys.exit(sys.version < "3.10")' && \
 	      which python) \
 			 )
 PYTHON_INSTALLER = $(shell (python -c 'import installer' &> /dev/null && echo "0"))
