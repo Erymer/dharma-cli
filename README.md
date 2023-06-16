@@ -1,6 +1,6 @@
 # About
 
-Dharma is a simple Python program that prints random quotes on the terminal.
+Zennin is a simple Python program that prints random quotes on the terminal.
 It adds a touch of inspiration or amusement to your daily console experience.
 
 
@@ -15,9 +15,9 @@ displaying system information everytime a new terminal is opened.
 
 # Quote Book
 
-The collection of quotes used by dharma is stored in a file known as the
+The collection of quotes used by zennin is stored in a file known as the
 `Quote Book`. By default, the program looks for the `quote book` at
-`$HOME/.config/dharma/quotebook.txt`. If this file doesn't exist, dharma
+`$HOME/.config/zennin/quotebook.txt`. If this file doesn't exist, zennin
 falls back to using a default quote book located at `/etc/quotebook.txt`.
 
 Feel free to use the default `quote book` as a reference to create your own
@@ -57,7 +57,7 @@ Install from AUR
 
 ## From a clone
 
-Dharma requires `build` and `installer` python modules to install.
+Zennin requires `build` and `installer` python modules to install.
 
 To check if these modules are installed run this lines in a terminal.
 
@@ -82,21 +82,21 @@ After doing this follow this instructions:
 Or copy this lines and run them in a terminal
 
 ``` bash
-git clone https://github.com/Erymer/dharma
-cd dharma
+git clone https://github.com/Erymer/zennin
+cd zennin
 sudo make install
 ```
 
 
-# Using Dharma
+# Using Zennin
 
 To use it as intended just include one of the following lines in the
 configuration file of your shell (bashrc, zshrc, etc).
 
 ``` bash
-dharma # Text in the center of the terminal
-dharma --justify right # Text to the far right
-dharma --justify left # Text to the far left
+zennin # Text in the center of the terminal
+zennin --justify right # Text to the far right
+zennin --justify left # Text to the far left
 ```
 
 And thas it! Now everytime you open a new terminal you will be greeted with a

@@ -1,6 +1,5 @@
 import unittest
-from unittest.mock import patch
-from dharma import QuoteBook
+from zennin import QuoteBook
 import tempfile
 import os
 import random
@@ -74,7 +73,7 @@ for quote in random_quotes:
     RANDOM_SEPARATOR_QUOTE_BOOK_CONTENT += f"\n\n"
 
 
-class TestDharma(unittest.TestCase):
+class TestZennin(unittest.TestCase):
 
     def setUp(self):
         '''

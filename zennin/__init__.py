@@ -1,9 +1,9 @@
-from dharma.quotebook import QuoteBook
+from zennin.quotebook import QuoteBook
 import random
 import argparse
 import os
 
-CONFIG_FOLDER = os.path.expanduser("~/.config/dharma")
+CONFIG_FOLDER = os.path.expanduser("~/.config/zennin")
 CONFIG_FILE_PATH = os.path.join(CONFIG_FOLDER, "quotebook.txt")
 EXAMPLE_FILE_PATH = "/etc/quotebook.txt"
 
@@ -41,29 +41,29 @@ def main():
         file_path = CONFIG_FILE_PATH
 
     try:
-        dharma = QuoteBook(file_path)
+        zennin = QuoteBook(file_path)
     except FileNotFoundError:
         try:
-            dharma = QuoteBook(EXAMPLE_FILE_PATH)
+            zennin = QuoteBook(EXAMPLE_FILE_PATH)
             print(f"{file_path} Doesn't exist. Using example file")
         except FileNotFoundError:
             print("No configuration file found")
             exit(1)
 
     if args.number:
-        print(f"You have {dharma.quotes_quantity} quotes in your file")
+        print(f"You have {zennin.quotes_quantity} quotes in your Quote Book")
         exit(0)
 
     if args.print:
         quote_num = args.print
     else:
-        quote_num=random.randint(1, dharma.quotes_quantity)
+        quote_num=random.randint(1, zennin.quotes_quantity)
 
     try:
-        dharma.print_quote(quote_num, justification_position)
+        zennin.print_quote(quote_num, justification_position)
     except IndexError:
         print("Quote number outside of scope")
-        print(f"You have {dharma.quotes_quantity} quotes")
+        print(f"You have {zennin.quotes_quantity} quotes")
         exit(1)
 
 

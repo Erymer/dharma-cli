@@ -5,13 +5,13 @@ LABEL maintainer="Erymer"
 
 ENV PYTHONUNBUFFERED 1
 
-COPY . /dharma
-VOLUME /dharma
-WORKDIR /dharma
+COPY . /zennin
+VOLUME /zennin
+WORKDIR /zennin
 
 
-RUN useradd --create-home -p "" -G wheel dharma && \
-    chown -R dharma /dharma && \
+RUN useradd --create-home -p "" -G wheel zennin && \
+    chown -R zennin /zennin && \
     echo 'root:0000' | chpasswd && \
     pacman -Syu --noconfirm && \
     pacman -S --noconfirm sudo python python-pytest python-installer \
@@ -22,4 +22,4 @@ RUN useradd --create-home -p "" -G wheel dharma && \
 
 ENV PATH="/py/bin:$PATH"
 
-USER dharma
+USER zennin
