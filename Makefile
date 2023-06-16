@@ -14,13 +14,13 @@ PIP = $(shell (which pip))
 install: build_dependencies
 	@python -m build && python -m installer dist/*.whl
 	@install -D -m644 doc/quotebook.txt /etc/quotebook.txt
-	@install -D -m644 doc/dharma.1 /usr/share/man/man1/dharma.1
+	@install -D -m644 doc/zennin.1 /usr/share/man/man1/zennin.1
 
 
 uninstall: uninstall_dependecies
-	@pip uninstall dharma
+	@pip uninstall zennin
 	@rm -rf /etc/quotebook.txt
-	@rm -rf /usr/share/man/man1/dharma.1
+	@rm -rf /usr/share/man/man1/zennin.1
 
 
 build_dependencies:
@@ -41,7 +41,7 @@ endif
 
 uninstall_dependecies:
 ifeq ($(PIP),)
-	$(error Removing Dharma requires python package manager "pip".\
+	$(error Removing Zennin requires python package manager "pip".\
 	 				Please install "python pip" in your system)
 endif
 

@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "Dharma"
+name = "Zennin"
 version = "1.0.0"
 authors = [
   { name="Marcelo Galván", email="marcelo_galvan@protonmail.com" },
@@ -21,7 +21,7 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/Erymer/dharma"
+"Homepage" = "https://github.com/Erymer/zennin"
 
 [project.scripts]
-dharma = "dharma:main"
+zennin = "zennin:main"
