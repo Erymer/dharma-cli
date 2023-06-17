@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Zennin"
-version = "1.0.0"
+dynamic = ["version"]
 authors = [
   { name="Marcelo Galván", email="marcelo_galvan@protonmail.com" },
 ]
@@ -25,3 +25,6 @@ classifiers = [
 
 [project.scripts]
 zennin = "zennin:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "zennin.__version__"}

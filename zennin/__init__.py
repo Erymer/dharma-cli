@@ -2,12 +2,17 @@ from zennin.quotebook import QuoteBook
 import random
 import argparse
 import os
+import subprocess
 
 CONFIG_FOLDER = os.path.expanduser("~/.config/zennin")
 CONFIG_FILE_PATH = os.path.join(CONFIG_FOLDER, "quotebook.txt")
 EXAMPLE_FILE_PATH = "/etc/quotebook.txt"
 
 DEFAULT_JUSTIFICATION_POSITION = "center"
+
+VERSION_COMMAND = "git describe --long --abbrev=7 | sed 's/^v//;s/\\([^-]*-g\\)/r\\1/;s/-/./g'"
+__version__ = subprocess.run(VERSION_COMMAND, shell=True, \
+                             capture_output=True, text=True).stdout.strip()
 
 
 def main():
