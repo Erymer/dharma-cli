@@ -1,8 +1,10 @@
 import unittest
 from zennin import QuoteBook
+import zennin
 import tempfile
 import os
 import random
+import subprocess
 
 
 QUOTES = [
@@ -116,7 +118,6 @@ class TestZennin(unittest.TestCase):
         print('NEXT QUOTES MUST BE ON THE CENTER')
         self.default_separator_book.print_quote(1, "center")
         self.random_separator_book.print_quote(1, "center")
-
 
 if __name__ == '__main__':
     unittest.main()

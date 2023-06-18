@@ -10,9 +10,16 @@ EXAMPLE_FILE_PATH = "/etc/quotebook.txt"
 
 DEFAULT_JUSTIFICATION_POSITION = "center"
 
-VERSION_COMMAND = "git describe --long --abbrev=7 | sed 's/^v//;s/\\([^-]*-g\\)/r\\1/;s/-/./g'"
-__version__ = subprocess.run(VERSION_COMMAND, shell=True, \
+VERSION_COMMAND = "git describe --tags --abbrev=0 | sed 's/^v//'"
+# Date of last commit
+DATE_COMMAND = "git log -1 --format=%cd --date=iso | cut -f 1 -d ' ' | sed 's/-//g'"
+
+version_stdout = subprocess.run(VERSION_COMMAND, shell=True, \
+                                 capture_output=True, text=True).stdout.strip()
+date_stdout = subprocess.run(DATE_COMMAND, shell=True, \
                              capture_output=True, text=True).stdout.strip()
+
+__version__ = f"{version_stdout}.dev{date_stdout}"
 
 
 def main():
