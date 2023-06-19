@@ -6,35 +6,37 @@ import subprocess
 
 CONFIG_FOLDER = os.path.expanduser("~/.config/zennin")
 CONFIG_FILE_PATH = os.path.join(CONFIG_FOLDER, "quotebook.txt")
-EXAMPLE_FILE_PATH = "/etc/quotebook.txt"
+EXAMPLE_FILE_PATH = "/usr/share/doc/zennin/quotebook.txt"
+
+QUOTEBOOK_HELP_URL = "https://github.com/Erymer/zennin#quote-book"
 
 DEFAULT_JUSTIFICATION_POSITION = "center"
 
 VERSION_COMMAND = "git describe --tags --abbrev=0 | sed 's/^v//'"
-# Date of last commit
-DATE_COMMAND = "git log -1 --format=%cd --date=iso | cut -f 1 -d ' ' | sed 's/-//g'"
 
-version_stdout = subprocess.run(VERSION_COMMAND, shell=True, \
-                                 capture_output=True, text=True).stdout.strip()
-date_stdout = subprocess.run(DATE_COMMAND, shell=True, \
+__version__ = subprocess.run(VERSION_COMMAND, shell=True, \
                              capture_output=True, text=True).stdout.strip()
-
-__version__ = f"{version_stdout}.dev{date_stdout}"
-
+HELP_TEXT = f"""
+Print quotes on your terminal.
+Quotes are grabed from 'Quote Book' file in {CONFIG_FILE_PATH}.
+To know more about this file please visit {QUOTEBOOK_HELP_URL}
+"""
 
 def main():
     '''
     Main function
     '''
     parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=HELP_TEXT)
     parser.add_argument("-j", "--justify",
                         help="Justification position. Accepted values are left, center, right,",
                         choices=["left", "right", "center"])
-    parser.add_argument("-f", "--file", help="Specify a file with quotes")
+    parser.add_argument("-f", "--file", help="Specify 'Quote Book' path")
     parser.add_argument("-p", "--print", help="Print a specific quote", type=int)
     parser.add_argument("-n", "--number",
                         help="Tells how many quotes you have in your file",
                         action="store_true")
+    parser.add_argument("-v", "--version", help="Print Zennin version")
 
     args = parser.parse_args()
 
@@ -59,12 +61,16 @@ def main():
             zennin = QuoteBook(EXAMPLE_FILE_PATH)
             print(f"{file_path} Doesn't exist. Using example file")
         except FileNotFoundError:
-            print("No configuration file found")
+            print("No 'Quote Book' file found")
+            print("For more information about this file please visit {QUOTEBOOK_HELP_URL}")
             exit(1)
 
     if args.number:
         print(f"You have {zennin.quotes_quantity} quotes in your Quote Book")
         exit(0)
+
+    if args.version:
+        print(f"Version: {__version__}")
 
     if args.print:
         quote_num = args.print

@@ -59,13 +59,14 @@ random_quotes = random.choices(QUOTES, k=NUM_OF_QUOTES_IN_TEST_FILE)
 DEFAULT_SEPARATOR = "'''"
 RANDOM_SEPARATOR = "***"
 
-DEFAULT_SEPARATOR_QUOTE_BOOK_CONTENT = ""
 
+DEFAULT_SEPARATOR_QUOTE_BOOK_CONTENT = ""
 for quote in random_quotes:
     DEFAULT_SEPARATOR_QUOTE_BOOK_CONTENT += f"{DEFAULT_SEPARATOR}\n"
     DEFAULT_SEPARATOR_QUOTE_BOOK_CONTENT += quote
     DEFAULT_SEPARATOR_QUOTE_BOOK_CONTENT += f"\n{DEFAULT_SEPARATOR}\n"
     DEFAULT_SEPARATOR_QUOTE_BOOK_CONTENT += f"\n\n"
+
 
 RANDOM_SEPARATOR_QUOTE_BOOK_CONTENT = ""
 for quote in random_quotes:
@@ -118,6 +119,21 @@ class TestZennin(unittest.TestCase):
         print('NEXT QUOTES MUST BE ON THE CENTER')
         self.default_separator_book.print_quote(1, "center")
         self.random_separator_book.print_quote(1, "center")
+
+
+    def test_zennin_version(self):
+        '''
+        Test if version command is correct
+        '''
+        VERSION_COMMAND = "git describe --tags --abbrev=0 | sed 's/^v//'"
+        expected = subprocess.run(VERSION_COMMAND, shell=True, \
+                                   capture_output=True, text=True).stdout.strip()
+        print(f"Version: {zennin.__version__}")
+        result = zennin.__version__
+        self.assertEqual(expected, result)
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
