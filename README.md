@@ -18,7 +18,8 @@ displaying system information everytime a new terminal is opened.
 The collection of quotes used by zennin is stored in a file known as the
 `Quote Book`. By default, the program looks for the `quote book` at
 `$HOME/.config/zennin/quotebook.txt`. If this file doesn't exist, zennin
-falls back to using a default quote book located at `/etc/quotebook.txt`.
+falls back to using a default quote book located at
+`/usr/share/doc/zennin/quotebook.txt`.
 
 Feel free to use the default `quote book` as a reference to create your own
 personalized collection. The syntax of the `quote book` is similar to
@@ -85,6 +86,13 @@ Or copy this lines and run them in a terminal
 git clone https://github.com/Erymer/zennin
 cd zennin
 sudo make install
+```
+
+
+## From pip
+
+``` bash
+pip install zennin
 ```
 
 

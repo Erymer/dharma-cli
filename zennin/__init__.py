@@ -17,9 +17,9 @@ VERSION_COMMAND = "git describe --tags --abbrev=0 | sed 's/^v//'"
 __version__ = subprocess.run(VERSION_COMMAND, shell=True, \
                              capture_output=True, text=True).stdout.strip()
 HELP_TEXT = f"""
-Print quotes on your terminal.
-Quotes are grabed from 'Quote Book' file in {CONFIG_FILE_PATH}.
-To know more about this file please visit {QUOTEBOOK_HELP_URL}
+Print quotes on your terminal.\n
+Quotes are grabed from 'Quote Book' file in {CONFIG_FILE_PATH}.\n
+To know more about this file please visit {QUOTEBOOK_HELP_URL}.
 """
 
 def main():
@@ -29,14 +29,13 @@ def main():
     parser = argparse.ArgumentParser()
     parser = argparse.ArgumentParser(description=HELP_TEXT)
     parser.add_argument("-j", "--justify",
-                        help="Justification position. Accepted values are left, center, right,",
+                        help="Justification position. Accepted values are 'left', 'center', 'right'.",
                         choices=["left", "right", "center"])
     parser.add_argument("-f", "--file", help="Specify 'Quote Book' path")
-    parser.add_argument("-p", "--print", help="Print a specific quote", type=int)
+    parser.add_argument("-p", "--print", help="Print a designated quote from the 'Quote Book' based on its position number.", type=int)
     parser.add_argument("-n", "--number",
-                        help="Tells how many quotes you have in your file",
+                        help="Prints quote quantity in your 'Quote Book'",
                         action="store_true")
-    parser.add_argument("-v", "--version", help="Print Zennin version")
 
     args = parser.parse_args()
 
@@ -62,15 +61,12 @@ def main():
             print(f"{file_path} Doesn't exist. Using example file")
         except FileNotFoundError:
             print("No 'Quote Book' file found")
-            print("For more information about this file please visit {QUOTEBOOK_HELP_URL}")
+            print(f"For more information about this file please visit {QUOTEBOOK_HELP_URL}")
             exit(1)
 
     if args.number:
         print(f"You have {zennin.quotes_quantity} quotes in your Quote Book")
         exit(0)
-
-    if args.version:
-        print(f"Version: {__version__}")
 
     if args.print:
         quote_num = args.print
