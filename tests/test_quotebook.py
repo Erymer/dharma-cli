@@ -120,20 +120,5 @@ class TestZennin(unittest.TestCase):
         self.default_separator_book.print_quote(1, "center")
         self.random_separator_book.print_quote(1, "center")
 
-
-    def test_zennin_version(self):
-        '''
-        Test if version command is correct
-        '''
-        VERSION_COMMAND = "git describe --tags --abbrev=0 | sed 's/^v//'"
-        expected = subprocess.run(VERSION_COMMAND, shell=True, \
-                                   capture_output=True, text=True).stdout.strip()
-        print(f"Version: {zennin.__version__}")
-        result = zennin.__version__
-        self.assertEqual(expected, result)
-
-
-
-
 if __name__ == '__main__':
     unittest.main()

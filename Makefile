@@ -16,12 +16,6 @@ install: build_dependencies
 	@install -D -m644 zennin/quotebook.txt /usr/share/doc/zennin/quotebook.txt
 	@install -D -m644 doc/zennin.1 /usr/share/man/man1/zennin.1
 
-uninstall: uninstall_dependecies
-	@pip uninstall zennin
-	@rm -rf /usr/share/doc/zennin/quotebook.txt
-	@rm -rf /usr/share/man/man1/zennin.1
-
-
 build_dependencies:
 ifeq ($(PYTHON),)
 	$(error No suitable Python version installed)

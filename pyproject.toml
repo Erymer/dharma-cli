@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Zennin"
-dynamic = ["version"]
+version = "1.1.0"
 authors = [
   { name="Marcelo Galván", email="marcelo_galvan@protonmail.com" },
 ]
-description = "Print custom quotes on your terminal"
+description = "Print custom quotes on your terminal."
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
@@ -25,6 +25,3 @@ classifiers = [
 
 [project.scripts]
 zennin = "zennin:main"
-
-[tool.setuptools.dynamic]
-version = {attr = "zennin.__version__"}
