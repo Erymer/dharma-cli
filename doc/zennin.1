@@ -36,7 +36,7 @@ Prints the ammount of quotes in the \fBQuote Book\fR.
 
 .SH FILES
 .TP
-.I /etc/quotebook.txt
+.I /usr/share/doc/zennin/quotebook.txt
 Default \fBQuote Book\fR file. If user config file doesn't exist, \fBzennin\fR will use this
 file.
 .TP
@@ -48,7 +48,7 @@ Per user \fBQuote Book\fR.
 The collection of quotes used by \fBzennin\fR is stored in a file known as the
 \fBQuote Book\fR. By default, the program looks for the \fBQuote Book\fR at
 \fI$HOME/.config/zennin/quotebook.txt\fR. If this file doesn't exist, \fBzennin\fR
-falls back to using a default quote book located at \fI/etc/quotebook.txt\fR.
+falls back to using a default quote book located at \fI/usr/share/doc/zennin/quotebook.txt\fR.
 
 Feel free to use the default \fBQuote Book\fR as a reference to create your own
 personalized collection. The syntax of the \fBQuote Book\fR is similar to python
@@ -75,7 +75,18 @@ You can have empty lines inside the quote
 
 
 .SH INTENDED USE
+To use it as intended just include one of the following lines in the
+configuration file of your shell (bashrc, zshrc, etc).
 
+.TP
+\fB\Text in the center of the terminal\fR
+zennin
+.TP
+\fB\Text to the for right\fR
+zennin --justify right
+.TP
+\fB\Text to the far left\fR
+zennin --justify left
 
 
 .SH BUGS

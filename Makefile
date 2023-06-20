@@ -12,14 +12,13 @@ PIP = $(shell (which pip))
 
 
 install: build_dependencies
-	@python -m build && python -m installer dist/*.whl
-	@install -D -m644 doc/quotebook.txt /etc/quotebook.txt
+	@python -m build -wn && python -m installer dist/*.whl
+	@install -D -m644 zennin/quotebook.txt /usr/share/doc/zennin/quotebook.txt
 	@install -D -m644 doc/zennin.1 /usr/share/man/man1/zennin.1
-
 
 uninstall: uninstall_dependecies
 	@pip uninstall zennin
-	@rm -rf /etc/quotebook.txt
+	@rm -rf /usr/share/doc/zennin/quotebook.txt
 	@rm -rf /usr/share/man/man1/zennin.1
 
 
