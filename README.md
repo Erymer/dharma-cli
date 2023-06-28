@@ -53,8 +53,20 @@ justification based on your preference.
 
 ## Arch linux
 
-Install from AUR
+Install from AUR 
 
+###### Manually
+``` bash
+git clone https://aur.archlinux.org/zennin.git
+cd zennin
+makepkg -si
+```
+
+###### Yay
+
+```bash
+yay -S zennin
+```
 
 ## From a clone
 
@@ -109,6 +121,23 @@ zennin --justify left # Text to the far left
 
 And thas it! Now everytime you open a new terminal you will be greeted with a
 quote.
+
+
+## Examples
+
+###### Zennin in the center (default)
+
+![Zennin Center](doc/zennin_center.gif)
+
+###### Zennin in the right
+
+![Zennin Right](doc/zennin_right.gif)
+
+###### Zennin in the left
+
+![Zennin left](doc/zennin_left.gif)
+
+
 
 
 # To Do
